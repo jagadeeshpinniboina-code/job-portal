@@ -1,0 +1,46 @@
+<nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="">AshokIT</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="mynavbar">
+            <ul class="navbar-nav me-auto">
+                {% if user.is_authenticated and user.is_staff %}
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'create' %}">
+                            Create
+                        </a>
+                    </li>
+
+                {% endif %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'jobs' %}">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">About</a>
+                </li>
+            </ul>
+            <form class="d-flex">
+                <input class="form-control me-2" type="text" name="keyword" value="{{ keyword }}" placeholder="Search">
+                <button class="btn btn-primary" type="submit">Search</button>
+            </form>
+            <ul class="navbar-nav">
+                {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link text-white"  href="{% url 'logout' %}">Logout</a>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link text-white"  href="{% url 'register' %}">Register</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white"  href="{% url 'login' %}">Login</a>
+                    </li>
+                {% endif %}
+
+            </ul>
+        </div>
+    </div>
+</nav>

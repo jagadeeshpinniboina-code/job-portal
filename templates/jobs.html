@@ -1,0 +1,109 @@
+
+{% extends 'base.html' %}
+
+{% block title %}
+    Jobs Page
+{% endblock %}
+
+{% block body %}
+
+    <div class="container-fluid mt-4">
+        {% if messages %}
+            {% for message in messages %}
+
+                <div class="alert alert-warning alert-dismissible fade show"
+                     role="alert">
+
+                    <strong>⚠️ Warning!</strong>
+                    {{ message }}
+
+                    <button type="button"
+                            class="btn-close"
+                            data-bs-dismiss="alert">
+                    </button>
+
+                </div>
+
+            {% endfor %}
+        {% endif %}
+
+
+        {% if jobs %}
+
+            <h3 class="text-center text-primary mb-4">
+                Available Jobs
+            </h3>
+
+            <div class="table-responsive">
+
+                <table class="table table-bordered table-success
+                          table-striped table-hover align-middle job-table">
+
+                    <thead class="table-dark">
+                    <tr>
+                        <th>Id</th>
+                        <th>Title</th>
+                        <th>Company</th>
+                        <th>Salary</th>
+                        <th>Location</th>
+                        <th>Skills</th>
+                        <th>Job Type</th>
+                        <th>Created At</th>
+                        <th>Description</th>
+                        <th>Apply</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    {% for job in jobs %}
+
+                        <tr>
+                            <td>{{ job.id }}</td>
+
+                            <td>{{ job.title }}</td>
+
+                            <td>{{ job.company }}</td>
+
+                            <td>{{ job.salary }}</td>
+
+                            <td>{{ job.location }}</td>
+
+                            <td>{{ job.skills_required }}</td>
+
+                            <td>{{ job.job_type }}</td>
+
+                            <td>{{ job.created_at|date:"d M Y, h:i A" }}</td>
+
+                            <td>
+                                <div class="job-description">
+                                    {{ job.description }}
+                                </div>
+                            </td>
+
+                            <td>
+                                <a href="{% url 'apply' pk=job.id %}"
+                                   class="btn btn-primary btn-sm">
+                                    Apply
+                                </a>
+                            </td>
+                        </tr>
+
+                    {% endfor %}
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        {% else %}
+
+            <h3 class="text-center text-danger mt-5">
+                No Jobs Available
+            </h3>
+
+        {% endif %}
+
+
+    </div>
+
+{% endblock %}
